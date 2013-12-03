@@ -7,7 +7,7 @@ import javax.websocket.ContainerProvider;
 import javax.websocket.Session;
 import javax.websocket.WebSocketContainer;
 
-import org.eclipse.jetty.websocket.jsr356.ClientContainer;
+import org.eclipse.jetty.util.component.LifeCycle;
 
 import com.example.services.BroadcastClientEndpoint;
 import com.example.services.Message;
@@ -26,8 +26,12 @@ public class ClientStarter {
 			}
 		}
 		
-		// Application doesn't exit if container's threads are still running
-		( ( ClientContainer )container ).stop();
+		// JSR-356 has no concept of Container lifecycle.
+		// (This is an oversight on the spec's part)
+		// This stops the lifecycle of the Client WebSocketContainer
+		if(container instanceof LifeCycle) {
+		    ( ( LifeCycle )container ).stop();
+		}
 	}
 }
 
