@@ -22,10 +22,10 @@ public class ServerStarter  {
         context.setInitParameter("contextConfigLocation",AppConfig.class.getName());
 
         // Create default servlet (servlet api required)
-        String resourceBase = System.getProperty("user.dir");
-        final ServletHolder defaultHolder = new ServletHolder("default",DefaultServlet.class);
-        defaultHolder.setInitParameter("resourceBase",resourceBase);
-        context.addServlet(defaultHolder,"/");
+        // The name of DefaultServlet should be set to 'defualt'.
+        final ServletHolder defaultHolder = new ServletHolder( "default", DefaultServlet.class );
+        defaultHolder.setInitParameter( "resourceBase", System.getProperty("user.dir") );
+        context.addServlet( defaultHolder, "/" );
 
         server.setHandler(context);
         WebSocketServerContainerInitializer.configureContext(context);

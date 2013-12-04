@@ -29,7 +29,7 @@ public class ClientStarter {
 		// JSR-356 has no concept of Container lifecycle.
 		// (This is an oversight on the spec's part)
 		// This stops the lifecycle of the Client WebSocketContainer
-		if(container instanceof LifeCycle) {
+		if( container instanceof LifeCycle ) {
 		    ( ( LifeCycle )container ).stop();
 		}
 	}
